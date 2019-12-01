@@ -14,19 +14,20 @@ jobs:
     - uses: subosito/flutter-action@v1.1.1
       with:
         channel: 'dev'
-        
-    - run: cd example
     
     - name: Enable web
       run: flutter config --enable-web
     
     - name: Add web support
+      working-directory: example
       run: flutter create .
     
     - name: Get dependencies
+      working-directory: example
       run: flutter pub get
     
     - name: Build
+      working-directory: example
       run: flutter build web
       
     - name: Deploy
@@ -34,4 +35,4 @@ jobs:
       env:
         ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         PUBLISH_BRANCH: gh-pages
-        PUBLISH_DIR: ./build/web
+        PUBLISH_DIR: ./example/build/web
