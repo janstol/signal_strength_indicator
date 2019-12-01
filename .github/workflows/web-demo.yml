@@ -18,17 +18,12 @@ jobs:
     - name: Enable web
       run: flutter config --enable-web
     
-    - name: Add web support
-      working-directory: example
-      run: flutter create .
-    
-    - name: Get dependencies
-      working-directory: example
-      run: flutter pub get
-    
     - name: Build
       working-directory: example
-      run: flutter build web
+      run: |
+        flutter create .
+        flutter pub get
+        flutter build web
       
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v2.5.1

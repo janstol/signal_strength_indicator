@@ -2,6 +2,7 @@
 
 [![Pub](https://img.shields.io/pub/v/signal_strength_indicator.svg?style=flat-square)](https://pub.dartlang.org/packages/signal_strength_indicator)
 [![Build Status](https://travis-ci.com/janstol/signal_strength_indicator.svg?branch=master)](https://travis-ci.com/janstol/signal_strength_indicator)
+[![Demo](https://img.shields.io/badge/DEMO-WEB-blue)](https://janstol.github.io/signal_strength_indicator/)
 
 Customizable signal strength indicator widget for Flutter.
 
