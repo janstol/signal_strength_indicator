@@ -19,6 +19,8 @@ class SignalStrengthIndicator extends StatelessWidget {
   /// Number of bars can be specified by [barCount]
   /// (reasonable number of bars is 3,4 or maybe 5).
   ///
+  /// Indicator can be [bevelled] or have [radius] but not both.
+  ///
   /// To specify how the indicator should behave, use [thresholds].
   /// For example:
   /// ```dart
@@ -47,6 +49,7 @@ class SignalStrengthIndicator extends StatelessWidget {
     Color inactiveColor,
     Map<num, Color> thresholds,
     Radius radius,
+    bool bevelled = false,
     double spacing = 0.2,
     EdgeInsets margin = EdgeInsets.zero,
   }) : this(
@@ -61,6 +64,7 @@ class SignalStrengthIndicator extends StatelessWidget {
             thresholds: thresholds,
             size: size,
             radius: radius,
+            bevelled: bevelled,
             spacing: spacing,
             margin: margin,
           ),

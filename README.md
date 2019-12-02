@@ -18,7 +18,7 @@ Customizable signal strength indicator widget for Flutter.
 Add this to your package's pubspec.yaml file:
 ```yaml
 dependencies:
-  signal_strength_indicator: ^0.1.0
+  signal_strength_indicator: ^0.2.0
 ```
 2. **Install it**
 

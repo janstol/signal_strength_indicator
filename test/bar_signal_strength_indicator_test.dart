@@ -44,5 +44,15 @@ void main() {
         matchesGoldenFile("goldens/bars-threshold.png"),
       );
     });
+
+    testWidgets("Bevel test", (tester) async {
+      final widget = createBarSignalStrengthIndicatorBevelTest();
+
+      await tester.pumpWidget(widget);
+      await expectLater(
+        find.byType(RepaintBoundary),
+        matchesGoldenFile("goldens/bars-bevelled.png"),
+      );
+    });
   });
 }

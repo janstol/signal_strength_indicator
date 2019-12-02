@@ -7,7 +7,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Signal example',
+      title: 'Signal strength indicator example',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Signal strength example"),
+        title: const Text("Signal strength indicator example"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -90,6 +90,53 @@ class _HomePageState extends State<HomePage> {
                   value: _signalStrength,
                   size: 50,
                   barCount: 5,
+                ),
+              ],
+            ),
+            const SizedBox(height: 50),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                SignalStrengthIndicator.bars(
+                  value: _signalStrength,
+                  size: 50,
+                  barCount: 4,
+                  bevelled: true,
+                  activeColor: Colors.blue,
+                  inactiveColor: Colors.blue[100],
+                ),
+                SignalStrengthIndicator.bars(
+                  value: _signalStrength,
+                  size: 50,
+                  barCount: 4,
+                  bevelled: true,
+                  spacing: 0.5,
+                ),
+                SignalStrengthIndicator.bars(
+                  value: _signalStrength,
+                  size: 50,
+                  barCount: 3,
+                  bevelled: true,
+                  spacing: 0.0,
+                ),
+                SignalStrengthIndicator.bars(
+                  value: _signalStrength,
+                  barCount: 3,
+                  bevelled: true,
+                  thresholds: <num, Color>{
+                    0.25: Colors.red,
+                    0.50: Colors.yellow,
+                    0.75: Colors.green,
+                  },
+                  // radius: Radius.circular(20.0),
+                  size: 50,
+                ),
+                SignalStrengthIndicator.bars(
+                  value: _signalStrength,
+                  size: 50,
+                  barCount: 5,
+                  bevelled: true,
                 ),
               ],
             ),

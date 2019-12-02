@@ -7,11 +7,13 @@ class BarSignalStrengthIndicatorStyle extends SignalStrengthIndicatorStyle {
   final double spacing;
   final Radius radius;
   final Map<num, Color> thresholds;
+  final bool bevelled;
 
   const BarSignalStrengthIndicatorStyle({
     this.barCount = 3,
     this.spacing,
     this.thresholds,
+    this.bevelled,
     Radius radius,
     num value,
     num minValue,
@@ -79,13 +81,25 @@ class _BarSignalStrengthIndicatorPainter extends CustomPainter {
 
       final paint = value > keys[i - 1] ? activeBarPaint : inactiveBarPaint;
 
-      canvas.drawRRect(
-        RRect.fromRectAndRadius(
+      Path bar;
+
+      if (style.bevelled) {
+        final prevBarHeight = (i == 1) ? 0 : (h * ((i - 1) / barCount));
+        bar = Path()
+          ..moveTo(left, top + barHeight - prevBarHeight)
+          ..lineTo(left + barWidthTotal, top)
+          ..lineTo(left + barWidthTotal, top + barHeight)
+          ..lineTo(left, top + barHeight)
+          ..close();
+      } else {
+        final rrect = RRect.fromRectAndRadius(
           Rect.fromLTWH(left, top, barWidthTotal, barHeight),
           style.radius,
-        ),
-        paint,
-      );
+        );
+        bar = Path()..addRRect(rrect);
+      }
+
+      canvas.drawPath(bar, paint);
     }
   }
 

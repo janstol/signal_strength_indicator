@@ -158,3 +158,49 @@ Widget createBarSignalStrengthIndicatorThresholdTest() {
     ),
   );
 }
+
+/// Creates [SignalStrengthIndicator.bars] for bevel test.
+Widget createBarSignalStrengthIndicatorBevelTest() {
+  return Center(
+    child: RepaintBoundary(
+      child: Container(
+        color: const Color(0xFF000000),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Row(
+              textDirection: TextDirection.ltr,
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                for (final val in [0.0, 0.3, 0.6, 0.9])
+                  SignalStrengthIndicator.bars(
+                    value: val,
+                    size: 50.0,
+                    bevelled: true,
+                    margin: const EdgeInsets.symmetric(horizontal: 10.0),
+                  ),
+              ],
+            ),
+            const SizedBox(height: 5.0),
+            Row(
+              textDirection: TextDirection.ltr,
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                for (final val in [0.0, 0.3, 0.6, 0.9])
+                  SignalStrengthIndicator.bars(
+                    value: val,
+                    size: 50.0,
+                    bevelled: true,
+                    margin: const EdgeInsets.symmetric(horizontal: 10.0),
+                    spacing: 0.0,
+                  ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
