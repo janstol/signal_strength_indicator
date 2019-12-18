@@ -36,7 +36,7 @@ Alternatively, your editor might support flutter packages get. Check the docs fo
 
 Now in your Dart code, you can use:
 ```dart
-import 'package:signal_strength_indicator/signal_strength_widget.dart';
+import 'package:signal_strength_indicator/signal_strength_indicator.dart';
 ```
 
 ## Usage
