@@ -6,13 +6,13 @@ class BarSignalStrengthIndicatorStyle extends SignalStrengthIndicatorStyle {
   final int barCount;
   final double spacing;
   final Radius radius;
-  final Map<num, Color> thresholds;
+  final Map<num, Color> levels;
   final bool bevelled;
 
   const BarSignalStrengthIndicatorStyle({
     this.barCount = 3,
     this.spacing,
-    this.thresholds,
+    this.levels,
     this.bevelled,
     Radius radius,
     num value,
@@ -54,7 +54,7 @@ class _BarSignalStrengthIndicatorPainter extends CustomPainter {
 
     final value = normalizeValue(style.value, style.minValue, style.maxValue);
 
-    final Map<num, Color> thresholds = style.thresholds ?? {};
+    final Map<num, Color> thresholds = style.levels ?? {};
     // remove thresholds where value is out of range
     thresholds
         .removeWhere((key, _) => key < style.minValue || key > style.maxValue);
@@ -87,7 +87,7 @@ class _BarSignalStrengthIndicatorPainter extends CustomPainter {
         final prevBarHeight = (i == 1) ? 0 : (h * ((i - 1) / barCount));
         bar = Path()
           ..moveTo(left, top + barHeight - prevBarHeight)
-          ..lineTo(left + barWidthTotal, top)
+          ..lineTo(left + barWidthTotal, top + (spacing * 0.75))
           ..lineTo(left + barWidthTotal, top + barHeight)
           ..lineTo(left, top + barHeight)
           ..close();
@@ -105,6 +105,6 @@ class _BarSignalStrengthIndicatorPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_BarSignalStrengthIndicatorPainter oldDelegate) {
-    return oldDelegate.style.value != style.value;
+    return false;
   }
 }

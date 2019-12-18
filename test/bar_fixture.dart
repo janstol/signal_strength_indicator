@@ -39,6 +39,22 @@ Widget createBarSignalStrengthIndicatorSizingTest() {
                   ),
               ],
             ),
+            const SizedBox(height: 5),
+            Row(
+              textDirection: TextDirection.ltr,
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                for (var i = 1; i < 11; i++)
+                  SignalStrengthIndicator.bars(
+                    value: 1.0,
+                    barCount: 4,
+                    size: i * 10.0,
+                    spacing: 0.5,
+                  ),
+              ],
+            ),
           ],
         ),
       ),
@@ -102,7 +118,7 @@ Widget createBarSignalStrengthIndicatorRangeTest() {
   );
 }
 
-/// Creates [SignalStrengthIndicator.bars] for threshold test.
+/// Creates [SignalStrengthIndicator.bars] for levels test.
 Widget createBarSignalStrengthIndicatorThresholdTest() {
   return Center(
     child: RepaintBoundary(
@@ -121,7 +137,7 @@ Widget createBarSignalStrengthIndicatorThresholdTest() {
                     value: val,
                     size: 50.0,
                     margin: const EdgeInsets.symmetric(horizontal: 10.0),
-                    thresholds: <num, Color>{
+                    levels: <num, Color>{
                       0.25: Colors.red,
                       0.50: Colors.yellow,
                       0.75: Colors.green,
@@ -144,7 +160,7 @@ Widget createBarSignalStrengthIndicatorThresholdTest() {
                     margin: const EdgeInsets.symmetric(horizontal: 10.0),
                     radius: const Radius.circular(50.0),
                     inactiveColor: Colors.grey,
-                    thresholds: <num, Color>{
+                    levels: <num, Color>{
                       0.25: Colors.red,
                       0.50: Colors.yellow,
                       0.75: Colors.green,
@@ -194,7 +210,23 @@ Widget createBarSignalStrengthIndicatorBevelTest() {
                     size: 50.0,
                     bevelled: true,
                     margin: const EdgeInsets.symmetric(horizontal: 10.0),
-                    spacing: 0.0,
+                    spacing: -0.02,
+                  ),
+              ],
+            ),
+            const SizedBox(height: 5.0),
+            Row(
+              textDirection: TextDirection.ltr,
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                for (final val in [0.0, 0.3, 0.6, 0.9])
+                  SignalStrengthIndicator.bars(
+                    value: val,
+                    size: 50.0,
+                    bevelled: true,
+                    margin: const EdgeInsets.symmetric(horizontal: 10.0),
+                    spacing: 0.5,
                   ),
               ],
             ),

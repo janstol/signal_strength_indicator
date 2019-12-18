@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:signal_strength_indicator/signal_strength_indicator.dart';
 
@@ -78,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                 SignalStrengthIndicator.bars(
                   value: _signalStrength,
                   barCount: 3,
-                  thresholds: <num, Color>{
+                  levels: <num, Color>{
                     0.25: Colors.red,
                     0.50: Colors.yellow,
                     0.75: Colors.green,
@@ -118,13 +120,13 @@ class _HomePageState extends State<HomePage> {
                   size: 50,
                   barCount: 3,
                   bevelled: true,
-                  spacing: 0.0,
+                  spacing: -0.01,
                 ),
                 SignalStrengthIndicator.bars(
                   value: _signalStrength,
                   barCount: 3,
                   bevelled: true,
-                  thresholds: <num, Color>{
+                  levels: <num, Color>{
                     0.25: Colors.red,
                     0.50: Colors.yellow,
                     0.75: Colors.green,
@@ -141,10 +143,61 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             const SizedBox(height: 50),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                SignalStrengthIndicator.sector(
+                  value: _signalStrength,
+                  size: 50,
+                  barCount: 4,
+                  spacing: 0.5,
+                ),
+                RotatedBox(
+                  quarterTurns: 3,
+                  child: SignalStrengthIndicator.sector(
+                    value: _signalStrength,
+                    size: 50,
+                    barCount: 4,
+                    spacing: 0.5,
+                    rounded: true,
+                  ),
+                ),
+                Transform.rotate(
+                  angle: -45 * pi / 180,
+                  origin: const Offset(-15, 0),
+                  child: SignalStrengthIndicator.sector(
+                    value: _signalStrength,
+                    size: 50,
+                    barCount: 3,
+                    spacing: -0.01,
+                  ),
+                ),
+                SignalStrengthIndicator.sector(
+                  value: _signalStrength,
+                  size: 50,
+                  barCount: 3,
+                  spacing: 0.5,
+                  levels: <num, Color>{
+                    0.25: Colors.red,
+                    0.50: Colors.yellow,
+                    0.75: Colors.green,
+                  },
+                ),
+                SignalStrengthIndicator.sector(
+                  value: _signalStrength,
+                  size: 50,
+                  barCount: 4,
+                  spacing: 0.5,
+                  rounded: true,
+                ),
+              ],
+            ),
             const SizedBox(height: 50),
+            const SizedBox(height: 10),
             Text(
               "Signal strength: ${_signalStrength.toStringAsFixed(2)}",
-              style: TextStyle(fontSize: 20.0),
+              style: const TextStyle(fontSize: 20.0),
             ),
             Slider(
               value: _signalStrength,

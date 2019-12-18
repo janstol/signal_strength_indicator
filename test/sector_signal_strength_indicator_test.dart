@@ -2,56 +2,47 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'bar_fixture.dart';
+import 'sector_fixture.dart';
 
 void main() {
   group('Bar signal indicators tests', () {
     testWidgets("Sizing test", (tester) async {
-      final widget = createBarSignalStrengthIndicatorSizingTest();
+      final widget = createSectorSignalStrengthIndicatorSizingTest();
 
       await tester.pumpWidget(widget);
       await expectLater(
         find.byType(RepaintBoundary),
-        matchesGoldenFile("goldens/bars-sizes.png"),
+        matchesGoldenFile("goldens/sector-sizes.png"),
       );
     });
 
     testWidgets("Value test", (tester) async {
-      final widget = createBarSignalStrengthIndicatorValueTest();
+      final widget = createSectorSignalStrengthIndicatorValueTest();
 
       await tester.pumpWidget(widget);
       await expectLater(
         find.byType(RepaintBoundary),
-        matchesGoldenFile("goldens/bars-values.png"),
+        matchesGoldenFile("goldens/sector-values.png"),
       );
     });
 
     testWidgets("Range test", (tester) async {
-      final widget = createBarSignalStrengthIndicatorRangeTest();
+      final widget = createSectorSignalStrengthIndicatorRangeTest();
 
       await tester.pumpWidget(widget);
       await expectLater(
         find.byType(RepaintBoundary),
-        matchesGoldenFile("goldens/bars-range.png"),
+        matchesGoldenFile("goldens/sector-range.png"),
       );
     });
 
     testWidgets("Threshold test", (tester) async {
-      final widget = createBarSignalStrengthIndicatorThresholdTest();
+      final widget = createSectorSignalStrengthIndicatorThresholdTest();
 
       await tester.pumpWidget(widget);
       await expectLater(
         find.byType(RepaintBoundary),
-        matchesGoldenFile("goldens/bars-levels.png"),
-      );
-    });
-
-    testWidgets("Bevel test", (tester) async {
-      final widget = createBarSignalStrengthIndicatorBevelTest();
-
-      await tester.pumpWidget(widget);
-      await expectLater(
-        find.byType(RepaintBoundary),
-        matchesGoldenFile("goldens/bars-bevelled.png"),
+        matchesGoldenFile("goldens/sector-levels.png"),
       );
     });
   });
