@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - uses: subosito/flutter-action@v1.1.1
+    - uses: actions/checkout@v2
+    - uses: subosito/flutter-action@v1.3.1
       with:
-        channel: 'dev'
+        channel: 'beta'
     
     - name: Enable web
       run: flutter config --enable-web
@@ -26,8 +26,8 @@ jobs:
         flutter build web
       
     - name: Deploy
-      uses: peaceiris/actions-gh-pages@v2.5.1
+      uses: peaceiris/actions-gh-pages@v3
       env:
-        ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        PUBLISH_BRANCH: gh-pages
-        PUBLISH_DIR: ./example/build/web
+        deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        publish_branch: gh-pages
+        publish_dir: ./example/build/web
