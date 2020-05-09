@@ -1,4 +1,4 @@
-name: example
+name: signal_strength_indicator_example
 description: Signal strength indicator widget example.
 
 version: 1.0.0+1
@@ -13,11 +13,8 @@ dependencies:
   signal_strength_indicator:
     path: ../
 
-
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-
+  lint: ^1.2.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

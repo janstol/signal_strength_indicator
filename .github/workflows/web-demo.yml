@@ -21,7 +21,7 @@ jobs:
     - name: Build
       working-directory: example
       run: |
-        flutter create .
+        flutter create --project-name signal_strength_indicator_example .
         flutter pub get
         flutter build web
       

@@ -31,6 +31,6 @@ abstract class SignalStrengthIndicatorStyle {
   CustomPainter get painter;
 
   @override
-  String toString() => "SignalStrengthIndicatorStyle("
-      "$value, $minValue, $maxValue, $size)";
+  String toString() => 'SignalStrengthIndicatorStyle('
+      '$value, $minValue, $maxValue, $size)';
 }

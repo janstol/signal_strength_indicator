@@ -1,3 +1,6 @@
+## [0.3.0+1] - 2020-05-09
+* minor update (updated lint package, fixed lints, updated example)
+
 ## [0.3.0] - 2019-12-18
 * tweaked bevelled bars
 * **BREAKING CHANGE**: changed `thresholds` to `levels`
