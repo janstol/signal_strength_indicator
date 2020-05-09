@@ -1,6 +1,6 @@
 {
-    "name": "example",
-    "short_name": "example",
+    "name": "signal_strength_indicator_example",
+    "short_name": "signal_strength_indicator_example",
     "start_url": ".",
     "display": "minimal-ui",
     "background_color": "#0175C2",
