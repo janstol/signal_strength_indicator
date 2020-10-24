@@ -22,7 +22,9 @@ class SignalStrengthIndicator extends StatelessWidget {
   ///
   /// Indicator can be [bevelled] or have [radius] but not both.
   ///
-  /// To specify how the indicator should behave, use [levels].
+  /// To specify how the indicator should behave, use [levels]. Levels values
+  /// are absolute values from [minValue] - [maxValue] and number of levels is
+  /// the same as [barCount]
   /// For example:
   /// ```dart
   /// SignalStrengthIndicator.bars(
@@ -30,9 +32,9 @@ class SignalStrengthIndicator extends StatelessWidget {
   ///   minValue: 0,
   ///   maxValue: 100,
   ///   levels: <num, Color>{
-  ///     0.25: Colors.red,
-  ///     0.50: Colors.yellow,
-  ///     0.75: Colors.green,
+  ///     25: Colors.red,
+  ///     50: Colors.yellow,
+  ///     75: Colors.green,
   ///   },
   /// )
   /// ```

@@ -3,22 +3,19 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:signal_strength_indicator/src/style/signal_strength_indicator_style.dart';
-import 'package:signal_strength_indicator/src/util.dart';
 
 class SectorSignalStrengthIndicatorStyle extends SignalStrengthIndicatorStyle {
-  final int barCount;
   final double spacing;
   final bool rounded;
-  final Map<num, Color> levels;
 
   const SectorSignalStrengthIndicatorStyle({
-    this.barCount,
     this.spacing,
-    this.levels,
     this.rounded,
     num value,
     num minValue,
     num maxValue,
+    int barCount,
+    Map<num, Color> levels,
     Color activeColor,
     Color inactiveColor,
     double size,
@@ -27,6 +24,8 @@ class SectorSignalStrengthIndicatorStyle extends SignalStrengthIndicatorStyle {
           value: value,
           minValue: minValue,
           maxValue: maxValue,
+          barCount: barCount,
+          levels: levels,
           activeColor: activeColor,
           inactiveColor: inactiveColor,
           size: size,
@@ -51,27 +50,13 @@ class _SectorSignalStrengthIndicatorPainter extends CustomPainter {
     final strokeWidth = h / barCount;
     final spacing = style.spacing * strokeWidth;
 
-    final value = normalizeValue(style.value, style.minValue, style.maxValue);
-
-    final Map<num, Color> thresholds = style.levels ?? {};
-    // remove thresholds where value is out of range
-    thresholds
-        .removeWhere((key, _) => key < style.minValue || key > style.maxValue);
-
-    // when there are no threshold or number of thresholds does not correspond
-    // with number of bars, use (create) 'default' thresholds
-    if (thresholds.isEmpty || thresholds.keys.length != barCount) {
-      thresholds.clear();
-      for (var i = 0; i < barCount; i++) {
-        thresholds.addAll({i / barCount: style.activeColor});
-      }
-    }
-
-    final keys = thresholds.keys.toList()..sort();
+    final value = style.normalizedValue;
+    final Map<num, Color> levels = style.normalizedLevels;
+    final keys = levels.keys.toList()..sort();
     final key = keys.lastWhere((t) => t < value, orElse: () => keys.first);
 
     final Paint activeBarPaint = Paint()
-      ..color = thresholds[key]
+      ..color = levels[key]
       ..strokeWidth = strokeWidth - spacing
       ..strokeCap = style.rounded ? StrokeCap.round : StrokeCap.butt
       ..strokeJoin = StrokeJoin.round
@@ -84,7 +69,7 @@ class _SectorSignalStrengthIndicatorPainter extends CustomPainter {
       ..style = PaintingStyle.stroke;
 
     final Paint activeFirstPaint = Paint()
-      ..color = thresholds[key]
+      ..color = levels[key]
       ..strokeWidth = strokeWidth - spacing
       ..style = PaintingStyle.fill;
 

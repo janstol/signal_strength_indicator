@@ -119,7 +119,7 @@ Widget createBarSignalStrengthIndicatorRangeTest() {
 }
 
 /// Creates [SignalStrengthIndicator.bars] for levels test.
-Widget createBarSignalStrengthIndicatorThresholdTest() {
+Widget createBarSignalStrengthIndicatorLevelsTest() {
   return Center(
     child: RepaintBoundary(
       child: Container(
@@ -161,9 +161,9 @@ Widget createBarSignalStrengthIndicatorThresholdTest() {
                     radius: const Radius.circular(50.0),
                     inactiveColor: Colors.grey,
                     levels: <num, Color>{
-                      0.25: Colors.red,
-                      0.50: Colors.yellow,
-                      0.75: Colors.green,
+                      25: Colors.red,
+                      50: Colors.yellow,
+                      75: Colors.green,
                     },
                   ),
               ],

@@ -135,7 +135,7 @@ Widget createSectorSignalStrengthIndicatorRangeTest() {
 }
 
 /// Creates [SignalStrengthIndicator.sector] for levels test.
-Widget createSectorSignalStrengthIndicatorThresholdTest() {
+Widget createSectorSignalStrengthIndicatorLevelsTest() {
   return Center(
     child: RepaintBoundary(
       child: Container(
@@ -177,9 +177,9 @@ Widget createSectorSignalStrengthIndicatorThresholdTest() {
                     rounded: true,
                     inactiveColor: Colors.grey,
                     levels: <num, Color>{
-                      0.25: Colors.red,
-                      0.50: Colors.yellow,
-                      0.75: Colors.green,
+                      25: Colors.red,
+                      50: Colors.yellow,
+                      75: Colors.green,
                     },
                   ),
               ],

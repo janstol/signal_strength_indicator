@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:signal_strength_indicator/src/style/signal_strength_indicator_style.dart';
-import 'package:signal_strength_indicator/src/util.dart';
 
 class BarSignalStrengthIndicatorStyle extends SignalStrengthIndicatorStyle {
-  final int barCount;
   final double spacing;
   final Radius radius;
-  final Map<num, Color> levels;
   final bool bevelled;
 
   const BarSignalStrengthIndicatorStyle({
-    this.barCount = 3,
     this.spacing,
-    this.levels,
     this.bevelled,
     Radius radius,
     num value,
     num minValue,
     num maxValue,
+    int barCount,
+    Map<num, Color> levels,
     Color activeColor,
     Color inactiveColor,
     double size,
@@ -27,6 +24,8 @@ class BarSignalStrengthIndicatorStyle extends SignalStrengthIndicatorStyle {
           value: value,
           minValue: minValue,
           maxValue: maxValue,
+          barCount: barCount,
+          levels: levels,
           activeColor: activeColor,
           inactiveColor: inactiveColor,
           size: size,
@@ -52,25 +51,11 @@ class _BarSignalStrengthIndicatorPainter extends CustomPainter {
     final spacing = style.spacing * barWidth;
     final barWidthTotal = barWidth - spacing * ((barCount - 1) / barCount);
 
-    final value = normalizeValue(style.value, style.minValue, style.maxValue);
-
-    final Map<num, Color> thresholds = style.levels ?? {};
-    // remove thresholds where value is out of range
-    thresholds
-        .removeWhere((key, _) => key < style.minValue || key > style.maxValue);
-
-    // when there are no threshold or number of thresholds does not correspond
-    // with number of bars, use (create) 'default' thresholds
-    if (thresholds.isEmpty || thresholds.keys.length != barCount) {
-      thresholds.clear();
-      for (var i = 0; i < barCount; i++) {
-        thresholds.addAll({i / barCount: style.activeColor});
-      }
-    }
-
-    final keys = thresholds.keys.toList()..sort();
+    final value = style.normalizedValue;
+    final Map<num, Color> levels = style.normalizedLevels;
+    final keys = levels.keys.toList()..sort();
     final key = keys.lastWhere((t) => t < value, orElse: () => keys.first);
-    final Paint activeBarPaint = Paint()..color = thresholds[key];
+    final Paint activeBarPaint = Paint()..color = levels[key];
     final Paint inactiveBarPaint = Paint()..color = style.inactiveColor;
 
     // draw bars

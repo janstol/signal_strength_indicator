@@ -1,3 +1,9 @@
+## [0.3.1] - 2020-10-24
+* bug fix for `levels` - levels should be absolute values from `minValue` to `maxValue` range (and they are normalized later)
+* refactoring 
+  * moved `barCount` and `levels` to `SignalStrengthIndicatorStyle`
+  * added `normalizedValue` and `normalizedLevels` getters to `SignalStrengthIndicatorStyle`
+
 ## [0.3.0+1] - 2020-05-09
 * minor update (updated lint package, fixed lints, updated example)
 

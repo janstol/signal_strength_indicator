@@ -22,7 +22,7 @@ See [WEB DEMO](https://janstol.github.io/signal_strength_indicator/).
 Add this to your package's pubspec.yaml file:
 ```yaml
 dependencies:
-  signal_strength_indicator: ^0.3.0+1
+  signal_strength_indicator: ^0.3.1
 ```
 2. **Install it**
 

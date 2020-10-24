@@ -1,6 +1,6 @@
 name: signal_strength_indicator
 description: Customizable signal strength indicator widget for Flutter. Allows to easily visualize signal strength.
-version: 0.3.0+1
+version: 0.3.1
 homepage: https://github.com/janstol/signal_strength_indicator
 
 environment:
@@ -13,7 +13,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  lint: ^1.2.0
+  lint: ^1.3.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
