@@ -7,18 +7,18 @@ class BarSignalStrengthIndicatorStyle extends SignalStrengthIndicatorStyle {
   final bool bevelled;
 
   const BarSignalStrengthIndicatorStyle({
-    this.spacing,
-    this.bevelled,
-    Radius radius,
-    num value,
-    num minValue,
-    num maxValue,
-    int barCount,
-    Map<num, Color> levels,
-    Color activeColor,
-    Color inactiveColor,
-    double size,
-    EdgeInsets margin,
+    required this.spacing,
+    required this.bevelled,
+    Radius? radius,
+    required num value,
+    num? minValue,
+    num? maxValue,
+    int? barCount,
+    Map<num, Color>? levels,
+    Color? activeColor,
+    Color? inactiveColor,
+    double? size,
+    EdgeInsets? margin,
   })  : radius = radius ?? Radius.zero,
         super(
           value: value,
@@ -54,8 +54,8 @@ class _BarSignalStrengthIndicatorPainter extends CustomPainter {
     final value = style.normalizedValue;
     final Map<num, Color> levels = style.normalizedLevels;
     final keys = levels.keys.toList()..sort();
-    final key = keys.lastWhere((t) => t < value, orElse: () => keys.first);
-    final Paint activeBarPaint = Paint()..color = levels[key];
+    final key = keys.lastWhere((num t) => t < value, orElse: () => keys.first);
+    final Paint activeBarPaint = Paint()..color = levels[key]!;
     final Paint inactiveBarPaint = Paint()..color = style.inactiveColor;
 
     // draw bars

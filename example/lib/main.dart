@@ -6,7 +6,7 @@ import 'package:signal_strength_indicator/signal_strength_indicator.dart';
 void main() => runApp(const App());
 
 class App extends StatelessWidget {
-  const App({Key key}) : super(key: key);
+  const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class App extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -83,7 +83,6 @@ class _HomePageState extends State<HomePage> {
                 ),
                 SignalStrengthIndicator.bars(
                   value: _signalStrength,
-                  barCount: 3,
                   // ignore: prefer_const_literals_to_create_immutables
                   levels: <num, Color>{
                     0.25: Colors.red,
@@ -123,13 +122,11 @@ class _HomePageState extends State<HomePage> {
                 SignalStrengthIndicator.bars(
                   value: _signalStrength,
                   size: 50,
-                  barCount: 3,
                   bevelled: true,
                   spacing: -0.01,
                 ),
                 SignalStrengthIndicator.bars(
                   value: _signalStrength,
-                  barCount: 3,
                   bevelled: true,
                   // ignore: prefer_const_literals_to_create_immutables
                   levels: <num, Color>{
@@ -175,14 +172,12 @@ class _HomePageState extends State<HomePage> {
                   child: SignalStrengthIndicator.sector(
                     value: _signalStrength,
                     size: 50,
-                    barCount: 3,
                     spacing: -0.01,
                   ),
                 ),
                 SignalStrengthIndicator.sector(
                   value: _signalStrength,
                   size: 50,
-                  barCount: 3,
                   spacing: 0.5,
                   // ignore: prefer_const_literals_to_create_immutables
                   levels: <num, Color>{
@@ -209,8 +204,6 @@ class _HomePageState extends State<HomePage> {
             Slider(
               value: _signalStrength,
               onChanged: _changeValue,
-              min: 0.0,
-              max: 1.0,
             ),
           ],
         ),

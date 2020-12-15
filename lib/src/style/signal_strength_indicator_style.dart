@@ -15,24 +15,26 @@ abstract class SignalStrengthIndicatorStyle {
   final Map<num, Color> levels;
   final Color activeColor;
   final Color inactiveColor;
-  final double size;
+  final double? size;
   final EdgeInsets margin;
 
   const SignalStrengthIndicatorStyle({
-    @required this.value,
-    num minValue,
-    num maxValue,
-    int barCount,
-    Map<num, Color> levels,
-    Color activeColor,
-    Color inactiveColor,
+    required this.value,
+    num? minValue,
+    num? maxValue,
+    int? barCount,
+    Map<num, Color>? levels,
+    Color? activeColor,
+    Color? inactiveColor,
     this.size,
-    this.margin = EdgeInsets.zero,
-  })  : minValue = minValue ?? 0.0,
+    EdgeInsets? margin,
+  })
+      : minValue = minValue ?? 0.0,
         maxValue = maxValue ?? 1.0,
         barCount = barCount ?? 3,
         levels = levels ?? const <num, Color>{},
         activeColor = activeColor ?? const Color(0xFF4CAF50),
+        margin = margin ?? EdgeInsets.zero,
         inactiveColor = inactiveColor ?? const Color(0xFFC8E6C9);
 
   /// Painter is responsible for painting indicator.

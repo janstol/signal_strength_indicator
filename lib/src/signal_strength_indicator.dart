@@ -8,8 +8,8 @@ class SignalStrengthIndicator extends StatelessWidget {
   final SignalStrengthIndicatorStyle style;
 
   const SignalStrengthIndicator({
-    Key key,
-    this.style,
+    Key? key,
+    required this.style,
   }) : super(key: key);
 
   /// Creates signal strength indicator with bars.
@@ -42,16 +42,16 @@ class SignalStrengthIndicator extends StatelessWidget {
   /// first and second bar will be yellow when value is greater than 50 and
   /// all bars will be green when value is greater than 75.
   SignalStrengthIndicator.bars({
-    Key key,
-    @required num value,
-    double size,
+    Key? key,
+    required num value,
+    double? size,
     int barCount = 3,
-    num minValue,
-    num maxValue,
-    Color activeColor,
-    Color inactiveColor,
-    Map<num, Color> levels,
-    Radius radius,
+    num? minValue,
+    num? maxValue,
+    Color? activeColor,
+    Color? inactiveColor,
+    Map<num, Color>? levels,
+    Radius? radius,
     bool bevelled = false,
     double spacing = 0.2,
     EdgeInsets margin = EdgeInsets.zero,
@@ -84,15 +84,15 @@ class SignalStrengthIndicator extends StatelessWidget {
   /// To specify how the indicator should behave, use [levels] -
   /// see [SignalStrengthIndicator.bars]
   SignalStrengthIndicator.sector({
-    Key key,
-    @required num value,
-    double size,
+    Key? key,
+    required num value,
+    required double size,
     int barCount = 3,
-    num minValue,
-    num maxValue,
-    Color activeColor,
-    Color inactiveColor,
-    Map<num, Color> levels,
+    num? minValue,
+    num? maxValue,
+    Color? activeColor,
+    Color? inactiveColor,
+    Map<num, Color>? levels,
     bool rounded = false,
     double spacing = 0.3,
     EdgeInsets margin = EdgeInsets.zero,
@@ -116,7 +116,7 @@ class SignalStrengthIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final IconThemeData iconTheme = IconTheme.of(context);
-    final double _size = style.size ?? iconTheme.size;
+    final double _size = style.size ?? iconTheme.size!;
 
     return Container(
       margin: style.margin,

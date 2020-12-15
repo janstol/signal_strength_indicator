@@ -1,3 +1,6 @@
+## [0.4.0-nullsafety.0] - 2020-12-15
+* migrated to nullsafety
+
 ## [0.3.1] - 2020-10-24
 * bug fix for `levels` - levels should be absolute values from `minValue` to `maxValue` range (and they are normalized later)
 * refactoring 

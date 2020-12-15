@@ -9,17 +9,17 @@ class SectorSignalStrengthIndicatorStyle extends SignalStrengthIndicatorStyle {
   final bool rounded;
 
   const SectorSignalStrengthIndicatorStyle({
-    this.spacing,
-    this.rounded,
-    num value,
-    num minValue,
-    num maxValue,
-    int barCount,
-    Map<num, Color> levels,
-    Color activeColor,
-    Color inactiveColor,
-    double size,
-    EdgeInsets margin,
+    required this.spacing,
+    required this.rounded,
+    required num value,
+    num? minValue,
+    num? maxValue,
+    int? barCount,
+    Map<num, Color>? levels,
+    Color? activeColor,
+    Color? inactiveColor,
+    required double size,
+    EdgeInsets? margin,
   }) : super(
           value: value,
           minValue: minValue,
@@ -53,10 +53,10 @@ class _SectorSignalStrengthIndicatorPainter extends CustomPainter {
     final value = style.normalizedValue;
     final Map<num, Color> levels = style.normalizedLevels;
     final keys = levels.keys.toList()..sort();
-    final key = keys.lastWhere((t) => t < value, orElse: () => keys.first);
+    final key = keys.lastWhere((num t) => t < value, orElse: () => keys.first);
 
     final Paint activeBarPaint = Paint()
-      ..color = levels[key]
+      ..color = levels[key]!
       ..strokeWidth = strokeWidth - spacing
       ..strokeCap = style.rounded ? StrokeCap.round : StrokeCap.butt
       ..strokeJoin = StrokeJoin.round
@@ -69,7 +69,7 @@ class _SectorSignalStrengthIndicatorPainter extends CustomPainter {
       ..style = PaintingStyle.stroke;
 
     final Paint activeFirstPaint = Paint()
-      ..color = levels[key]
+      ..color = levels[key]!
       ..strokeWidth = strokeWidth - spacing
       ..style = PaintingStyle.fill;
 
