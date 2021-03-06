@@ -15,9 +15,6 @@ jobs:
       with:
         channel: 'beta'
     
-    - name: Enable web
-      run: flutter config --enable-web
-    
     - name: Build
       working-directory: example
       run: |
