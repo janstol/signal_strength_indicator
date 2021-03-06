@@ -28,8 +28,7 @@ abstract class SignalStrengthIndicatorStyle {
     Color? inactiveColor,
     this.size,
     EdgeInsets? margin,
-  })
-      : minValue = minValue ?? 0.0,
+  })  : minValue = minValue ?? 0.0,
         maxValue = maxValue ?? 1.0,
         barCount = barCount ?? 3,
         levels = levels ?? const <num, Color>{},

@@ -13,8 +13,7 @@ Customizable signal strength indicator widget for Flutter.
 * [Feature requests and bugs](#feature-requests-and-bugs)
 
 ## Features
-See [WEB DEMO](https://janstol.github.io/signal_strength_indicator/).
-> NOTE: Flutter web support is currently in beta, so you may experience some issues.
+See the [WEB DEMO](https://janstol.github.io/signal_strength_indicator/).
 
 ## [Installation](https://pub.dev/packages/signal_strength_indicator#-installing-tab-)
 1. **Depend on it**
@@ -22,7 +21,7 @@ See [WEB DEMO](https://janstol.github.io/signal_strength_indicator/).
 Add this to your package's pubspec.yaml file:
 ```yaml
 dependencies:
-  signal_strength_indicator: ^0.3.1
+  signal_strength_indicator: ^0.4.0
 ```
 2. **Install it**
 
