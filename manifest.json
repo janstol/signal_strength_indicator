@@ -1,11 +1,11 @@
 {
-    "name": "signal_strength_indicator_example",
-    "short_name": "signal_strength_indicator_example",
+    "name": "Flutter Signal strength indicator widget example",
+    "short_name": "Signal strength indicator widget example",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Flutter Signal strength indicator widget example.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
