@@ -90,6 +90,6 @@ class _BarSignalStrengthIndicatorPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_BarSignalStrengthIndicatorPainter oldDelegate) {
-    return false;
+    return oldDelegate.style.value != style.value;
   }
 }
