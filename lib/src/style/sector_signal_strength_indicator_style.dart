@@ -84,7 +84,8 @@ class _SectorSignalStrengthIndicatorPainter extends CustomPainter {
       final radius = w - offset - (strokeWidth / 2);
 
       final paint = value > keys[i - 1] ? activeBarPaint : inactiveBarPaint;
-      final firstPaint = value > keys[i - 1] ? activeFirstPaint : inactiveFirstPaint;
+      final firstPaint =
+          value > keys[i - 1] ? activeFirstPaint : inactiveFirstPaint;
 
       canvas.clipRect(Rect.fromLTWH(0, 0, w, h));
 
