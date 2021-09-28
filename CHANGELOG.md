@@ -1,3 +1,6 @@
+## [0.4.1] - 2021-09-28
+* Fixed [Widget not rendered on value change](https://github.com/janstol/signal_strength_indicator/issues/2) (thanks @casabian for [contribution](https://github.com/janstol/signal_strength_indicator/pull/3))
+
 ## [0.4.0] - 2021-03-06
 * migrated to nullsafety (stable)
 
