@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:signal_strength_indicator/src/style/bar_signal_strength_indicator_style.dart';
 import 'package:signal_strength_indicator/src/style/sector_signal_strength_indicator_style.dart';
 import 'package:signal_strength_indicator/src/style/signal_strength_indicator_style.dart';
@@ -8,9 +7,9 @@ class SignalStrengthIndicator extends StatelessWidget {
   final SignalStrengthIndicatorStyle style;
 
   const SignalStrengthIndicator({
-    Key? key,
+    super.key,
     required this.style,
-  }) : super(key: key);
+  });
 
   /// Creates signal strength indicator with bars.
   ///
@@ -38,9 +37,9 @@ class SignalStrengthIndicator extends StatelessWidget {
   ///   },
   /// )
   /// ```
-  /// means that first bar will be red when value is greater than 25,
-  /// first and second bar will be yellow when value is greater than 50 and
-  /// all bars will be green when value is greater than 75.
+  /// means that first bar will be red when value is >= 25,
+  /// first and second bar will be yellow when value is >= 50,
+  /// and all bars will be green when value is >= 75.
   SignalStrengthIndicator.bars({
     Key? key,
     required num value,
@@ -116,13 +115,13 @@ class SignalStrengthIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final IconThemeData iconTheme = IconTheme.of(context);
-    final double _size = style.size ?? iconTheme.size!;
+    final double size = style.size ?? iconTheme.size ?? 24.0;
 
     return Container(
       margin: style.margin,
       child: SizedBox(
-        width: _size,
-        height: _size,
+        width: size,
+        height: size,
         child: CustomPaint(
           painter: style.painter,
         ),

@@ -1,12 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:signal_strength_indicator/src/style/bar_signal_strength_indicator_style.dart';
 
 import '../util.dart';
 
 /// Extend this class to create a custom signal strength indicator.
-///
-/// See [BarSignalStrengthIndicatorStyle].
 abstract class SignalStrengthIndicatorStyle {
   final num value;
   final num minValue;
@@ -51,17 +48,43 @@ abstract class SignalStrengthIndicatorStyle {
     levels = levels
         .map((k, v) => MapEntry(normalizeValue(k, minValue, maxValue), v));
 
-    // when there are no levels or number of levels does not correspond
-    // with number of bars, use (create) 'default' levels
-    if (levels.isEmpty || levels.keys.length != barCount) {
-      levels.clear();
+    // when there are no levels, use (create) 'default' levels
+    if (levels.isEmpty) {
       for (var i = 0; i < barCount; i++) {
-        levels.addAll({i / barCount: activeColor});
+        levels[i / barCount] = activeColor;
       }
     }
 
     return levels;
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! SignalStrengthIndicatorStyle) return false;
+    return other.value == value &&
+        other.minValue == minValue &&
+        other.maxValue == maxValue &&
+        other.barCount == barCount &&
+        mapEquals(other.levels, levels) &&
+        other.activeColor == activeColor &&
+        other.inactiveColor == inactiveColor &&
+        other.size == size &&
+        other.margin == margin;
+  }
+
+  @override
+  int get hashCode => Object.hash(
+        value,
+        minValue,
+        maxValue,
+        barCount,
+        Object.hashAll(levels.entries.map((e) => Object.hash(e.key, e.value))),
+        activeColor,
+        inactiveColor,
+        size,
+        margin,
+      );
 
   @override
   String toString() => 'SignalStrengthIndicatorStyle('

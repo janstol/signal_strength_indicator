@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:signal_strength_indicator/src/style/signal_strength_indicator_style.dart';
 
@@ -11,29 +10,31 @@ class SectorSignalStrengthIndicatorStyle extends SignalStrengthIndicatorStyle {
   const SectorSignalStrengthIndicatorStyle({
     required this.spacing,
     required this.rounded,
-    required num value,
-    num? minValue,
-    num? maxValue,
-    int? barCount,
-    Map<num, Color>? levels,
-    Color? activeColor,
-    Color? inactiveColor,
-    required double size,
-    EdgeInsets? margin,
-  }) : super(
-          value: value,
-          minValue: minValue,
-          maxValue: maxValue,
-          barCount: barCount,
-          levels: levels,
-          activeColor: activeColor,
-          inactiveColor: inactiveColor,
-          size: size,
-          margin: margin,
-        );
+    required super.value,
+    super.minValue,
+    super.maxValue,
+    super.barCount,
+    super.levels,
+    super.activeColor,
+    super.inactiveColor,
+    required super.size,
+    super.margin,
+  });
 
   @override
   CustomPainter get painter => _SectorSignalStrengthIndicatorPainter(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! SectorSignalStrengthIndicatorStyle) return false;
+    return super == other &&
+        other.spacing == spacing &&
+        other.rounded == rounded;
+  }
+
+  @override
+  int get hashCode => Object.hash(super.hashCode, spacing, rounded);
 }
 
 class _SectorSignalStrengthIndicatorPainter extends CustomPainter {
@@ -53,7 +54,8 @@ class _SectorSignalStrengthIndicatorPainter extends CustomPainter {
     final value = style.normalizedValue;
     final Map<num, Color> levels = style.normalizedLevels;
     final keys = levels.keys.toList()..sort();
-    final key = keys.lastWhere((num t) => t < value, orElse: () => keys.first);
+    final key =
+        keys.lastWhere((num t) => t <= value, orElse: () => keys.first);
 
     final Paint activeBarPaint = Paint()
       ..color = levels[key]!
@@ -78,16 +80,17 @@ class _SectorSignalStrengthIndicatorPainter extends CustomPainter {
       ..strokeWidth = strokeWidth - spacing
       ..style = PaintingStyle.fill;
 
+    canvas.clipRect(Rect.fromLTWH(0, 0, w, h));
+
     // draw segments
     for (int i = 1; i <= barCount; i++) {
-      final offset = (barCount - i) * strokeWidth;
-      final radius = w - offset - (strokeWidth / 2);
+      final arcOffset = (barCount - i) * strokeWidth;
+      final radius = w - arcOffset - (strokeWidth / 2);
+      final barThreshold = (i - 1) / barCount;
 
-      final paint = value > keys[i - 1] ? activeBarPaint : inactiveBarPaint;
+      final paint = value >= barThreshold ? activeBarPaint : inactiveBarPaint;
       final firstPaint =
-          value > keys[i - 1] ? activeFirstPaint : inactiveFirstPaint;
-
-      canvas.clipRect(Rect.fromLTWH(0, 0, w, h));
+          value >= barThreshold ? activeFirstPaint : inactiveFirstPaint;
 
       if (i == 1) {
         // draw first segment
@@ -108,11 +111,11 @@ class _SectorSignalStrengthIndicatorPainter extends CustomPainter {
         }
       } else {
         // draw other segments
-        final offset = style.rounded ? strokeWidth / 2.0 : 0.0;
+        final roundedOffset = style.rounded ? strokeWidth / 2.0 : 0.0;
         canvas.drawArc(
           Rect.fromCircle(
-            center: size.bottomLeft(Offset(offset, -offset)),
-            radius: radius - offset,
+            center: size.bottomLeft(Offset(roundedOffset, -roundedOffset)),
+            radius: radius - roundedOffset,
           ),
           -90 * (pi / 180),
           90 * (pi / 180),
@@ -125,6 +128,6 @@ class _SectorSignalStrengthIndicatorPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_SectorSignalStrengthIndicatorPainter oldDelegate) {
-    return oldDelegate.style.value != style.value;
+    return oldDelegate.style != style;
   }
 }

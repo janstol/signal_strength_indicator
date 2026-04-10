@@ -1,3 +1,20 @@
+## [0.5.0] - 2026-04-10
+* **BREAKING**: migrated to Dart 3 / Flutter 3 (SDK constraint >=3.0.0 <4.0.0)
+* Replaced `lint` package with `flutter_lints` for Dart 3 compatibility
+* Removed deprecated `strong-mode` analyzer options
+* Fixed division by zero when `minValue == maxValue`
+* Fixed `shouldRepaint` to compare all style properties (previously only `value` was checked, preventing repaints on color/level changes)
+* Fixed null dereference on `IconTheme.size` — falls back to `24.0`
+* Fixed threshold comparison: bars are now active when `value >= threshold` (was strict `>`)
+* Added value clamping in `normalizeValue` to 0.0–1.0 range
+* Fixed user-provided `levels` being silently discarded when count != `barCount`
+* Moved `clipRect` outside the draw loop in sector painter
+* Fixed variable shadowing in sector painter
+* Removed redundant imports (`widgets.dart`, `cupertino.dart`)
+* Updated constructors to use `super` parameters (Dart 3 style)
+* Added unit tests for `normalizeValue` and `normalizedLevels`
+* Updated README with full parameter documentation and more usage examples
+
 ## [0.4.1] - 2021-09-28
 * Fixed [Widget not rendered on value change](https://github.com/janstol/signal_strength_indicator/issues/2) (thanks @casabian for [contribution](https://github.com/janstol/signal_strength_indicator/pull/3))
 

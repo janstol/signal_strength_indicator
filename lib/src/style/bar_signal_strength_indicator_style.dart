@@ -10,30 +10,32 @@ class BarSignalStrengthIndicatorStyle extends SignalStrengthIndicatorStyle {
     required this.spacing,
     required this.bevelled,
     Radius? radius,
-    required num value,
-    num? minValue,
-    num? maxValue,
-    int? barCount,
-    Map<num, Color>? levels,
-    Color? activeColor,
-    Color? inactiveColor,
-    double? size,
-    EdgeInsets? margin,
-  })  : radius = radius ?? Radius.zero,
-        super(
-          value: value,
-          minValue: minValue,
-          maxValue: maxValue,
-          barCount: barCount,
-          levels: levels,
-          activeColor: activeColor,
-          inactiveColor: inactiveColor,
-          size: size,
-          margin: margin,
-        );
+    required super.value,
+    super.minValue,
+    super.maxValue,
+    super.barCount,
+    super.levels,
+    super.activeColor,
+    super.inactiveColor,
+    super.size,
+    super.margin,
+  }) : radius = radius ?? Radius.zero;
 
   @override
   CustomPainter get painter => _BarSignalStrengthIndicatorPainter(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! BarSignalStrengthIndicatorStyle) return false;
+    return super == other &&
+        other.spacing == spacing &&
+        other.radius == radius &&
+        other.bevelled == bevelled;
+  }
+
+  @override
+  int get hashCode => Object.hash(super.hashCode, spacing, radius, bevelled);
 }
 
 class _BarSignalStrengthIndicatorPainter extends CustomPainter {
@@ -54,7 +56,8 @@ class _BarSignalStrengthIndicatorPainter extends CustomPainter {
     final value = style.normalizedValue;
     final Map<num, Color> levels = style.normalizedLevels;
     final keys = levels.keys.toList()..sort();
-    final key = keys.lastWhere((num t) => t < value, orElse: () => keys.first);
+    final key =
+        keys.lastWhere((num t) => t <= value, orElse: () => keys.first);
     final Paint activeBarPaint = Paint()..color = levels[key]!;
     final Paint inactiveBarPaint = Paint()..color = style.inactiveColor;
 
@@ -63,8 +66,9 @@ class _BarSignalStrengthIndicatorPainter extends CustomPainter {
       final barHeight = h * (i / barCount);
       final left = (i - 1) * (barWidthTotal + spacing);
       final top = h - barHeight;
+      final barThreshold = (i - 1) / barCount;
 
-      final paint = value > keys[i - 1] ? activeBarPaint : inactiveBarPaint;
+      final paint = value >= barThreshold ? activeBarPaint : inactiveBarPaint;
 
       Path bar;
 
@@ -90,6 +94,6 @@ class _BarSignalStrengthIndicatorPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_BarSignalStrengthIndicatorPainter oldDelegate) {
-    return oldDelegate.style.value != style.value;
+    return oldDelegate.style != style;
   }
 }

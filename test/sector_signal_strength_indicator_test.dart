@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'bar_fixture.dart';
 import 'sector_fixture.dart';
 
 void main() {
-  group('Bar signal indicators tests', () {
+  group('Sector signal indicators tests', () {
     testWidgets('Sizing test', (tester) async {
       final widget = createSectorSignalStrengthIndicatorSizingTest();
 

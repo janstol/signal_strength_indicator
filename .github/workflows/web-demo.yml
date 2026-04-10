@@ -3,28 +3,28 @@ name: Web demo deploy
 on:
   push:
     branches:
-    - master
+      - master
 
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: subosito/flutter-action@v1.4.0
-      with:
-        channel: 'beta'
-    
-    - name: Build
-      working-directory: example
-      run: |
-        flutter create --project-name signal_strength_indicator_example .
-        flutter pub get
-        flutter build web
-      
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_branch: gh-pages
-        publish_dir: ./example/build/web
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.7'
+          channel: 'stable'
+
+      - name: Build
+        working-directory: example
+        run: |
+          flutter pub get
+          flutter build web
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./example/build/web
