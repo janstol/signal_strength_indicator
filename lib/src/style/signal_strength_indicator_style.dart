@@ -8,6 +8,7 @@ abstract class SignalStrengthIndicatorStyle {
   final num value;
   final num minValue;
   final num maxValue;
+  final num? minimumActiveValue;
   final int barCount;
   final Map<num, Color> levels;
   final Color activeColor;
@@ -19,13 +20,20 @@ abstract class SignalStrengthIndicatorStyle {
     required this.value,
     num? minValue,
     num? maxValue,
+    this.minimumActiveValue,
     int? barCount,
     Map<num, Color>? levels,
     Color? activeColor,
     Color? inactiveColor,
     this.size,
     EdgeInsets? margin,
-  })  : minValue = minValue ?? 0.0,
+  })  : assert(minimumActiveValue == null ||
+            (minimumActiveValue >= (minValue ?? 0.0) &&
+                minimumActiveValue <=
+                    (minValue ?? 0.0) +
+                        ((maxValue ?? 1.0) - (minValue ?? 0.0)) /
+                            (barCount ?? 3))),
+        minValue = minValue ?? 0.0,
         maxValue = maxValue ?? 1.0,
         barCount = barCount ?? 3,
         levels = levels ?? const <num, Color>{},
@@ -38,6 +46,10 @@ abstract class SignalStrengthIndicatorStyle {
 
   /// Returns normalized value of [value] (range from 0.0 to 1.0).
   num get normalizedValue => normalizeValue(value, minValue, maxValue);
+
+  /// Returns the normalized threshold for activating the first segment.
+  num get normalizedMinimumActiveValue =>
+      normalizeValue(minimumActiveValue ?? minValue, minValue, maxValue);
 
   /// Returns [levels] with normalized values (range from 0.0 to 1.0).
   Map<num, Color> get normalizedLevels {
@@ -65,6 +77,7 @@ abstract class SignalStrengthIndicatorStyle {
     return other.value == value &&
         other.minValue == minValue &&
         other.maxValue == maxValue &&
+        other.minimumActiveValue == minimumActiveValue &&
         other.barCount == barCount &&
         mapEquals(other.levels, levels) &&
         other.activeColor == activeColor &&
@@ -78,6 +91,7 @@ abstract class SignalStrengthIndicatorStyle {
         value,
         minValue,
         maxValue,
+        minimumActiveValue,
         barCount,
         Object.hashAllUnordered(
           levels.entries.map((e) => Object.hash(e.key, e.value)),

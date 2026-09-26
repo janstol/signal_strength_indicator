@@ -13,6 +13,7 @@ class BarSignalStrengthIndicatorStyle extends SignalStrengthIndicatorStyle {
     required super.value,
     super.minValue,
     super.maxValue,
+    super.minimumActiveValue,
     super.barCount,
     super.levels,
     super.activeColor,
@@ -66,7 +67,8 @@ class _BarSignalStrengthIndicatorPainter extends CustomPainter {
       final barHeight = h * (i / barCount);
       final left = (i - 1) * (barWidthTotal + spacing);
       final top = h - barHeight;
-      final barThreshold = (i - 1) / barCount;
+      final barThreshold =
+          i == 1 ? style.normalizedMinimumActiveValue : (i - 1) / barCount;
 
       final paint = value >= barThreshold ? activeBarPaint : inactiveBarPaint;
 

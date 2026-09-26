@@ -29,6 +29,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   double _signalStrength = 0.0;
+  double _minimumActiveValue = 0.1;
 
   void _changeValue(double value) {
     setState(() {
@@ -44,7 +45,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
+        child: ListView(
           children: <Widget>[
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -196,6 +197,67 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             const SizedBox(height: 50),
+            const Text('Minimum active value'),
+            Text(_minimumActiveValue.toStringAsFixed(2)),
+            Slider(
+              value: _minimumActiveValue,
+              min: 0,
+              max: 0.3,
+              divisions: 30,
+              onChanged: (value) {
+                setState(() {
+                  _minimumActiveValue = value;
+                });
+              },
+            ),
+            Wrap(
+              spacing: 24,
+              runSpacing: 16,
+              children: [
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text('Default'),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SignalStrengthIndicator.bars(
+                          value: _signalStrength,
+                          size: 50,
+                        ),
+                        const SizedBox(width: 12),
+                        SignalStrengthIndicator.sector(
+                          value: _signalStrength,
+                          size: 50,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text('With threshold'),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SignalStrengthIndicator.bars(
+                          value: _signalStrength,
+                          size: 50,
+                          minimumActiveValue: _minimumActiveValue,
+                        ),
+                        const SizedBox(width: 12),
+                        SignalStrengthIndicator.sector(
+                          value: _signalStrength,
+                          size: 50,
+                          minimumActiveValue: _minimumActiveValue,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
             const SizedBox(height: 10),
             Text(
               'Signal strength: ${_signalStrength.toStringAsFixed(2)}',

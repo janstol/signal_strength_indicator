@@ -18,6 +18,8 @@ class SignalStrengthIndicator extends StatelessWidget {
   ///
   /// Number of bars can be specified by [barCount]
   /// (reasonable number of bars is 3,4 or maybe 5).
+  /// [minimumActiveValue] sets the value at which the first bar becomes active.
+  /// It defaults to [minValue] and cannot exceed the second bar's threshold.
   ///
   /// Indicator can be [bevelled] or have [radius] but not both.
   ///
@@ -47,6 +49,7 @@ class SignalStrengthIndicator extends StatelessWidget {
     int barCount = 3,
     num? minValue,
     num? maxValue,
+    num? minimumActiveValue,
     Color? activeColor,
     Color? inactiveColor,
     Map<num, Color>? levels,
@@ -60,6 +63,7 @@ class SignalStrengthIndicator extends StatelessWidget {
             value: value,
             minValue: minValue,
             maxValue: maxValue,
+            minimumActiveValue: minimumActiveValue,
             barCount: barCount,
             activeColor: activeColor,
             inactiveColor: inactiveColor,
@@ -79,6 +83,8 @@ class SignalStrengthIndicator extends StatelessWidget {
   ///
   /// Number of bars (segments) can be specified by [barCount]
   /// (reasonable number of bars is 3,4 or maybe 5).
+  /// [minimumActiveValue] sets when the first sector becomes active.
+  /// It defaults to [minValue] and cannot exceed the second sector's threshold.
   ///
   /// To specify how the indicator should behave, use [levels] -
   /// see [SignalStrengthIndicator.bars]
@@ -89,6 +95,7 @@ class SignalStrengthIndicator extends StatelessWidget {
     int barCount = 3,
     num? minValue,
     num? maxValue,
+    num? minimumActiveValue,
     Color? activeColor,
     Color? inactiveColor,
     Map<num, Color>? levels,
@@ -101,6 +108,7 @@ class SignalStrengthIndicator extends StatelessWidget {
             value: value,
             minValue: minValue,
             maxValue: maxValue,
+            minimumActiveValue: minimumActiveValue,
             barCount: barCount,
             activeColor: activeColor,
             inactiveColor: inactiveColor,

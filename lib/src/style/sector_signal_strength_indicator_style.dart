@@ -13,6 +13,7 @@ class SectorSignalStrengthIndicatorStyle extends SignalStrengthIndicatorStyle {
     required super.value,
     super.minValue,
     super.maxValue,
+    super.minimumActiveValue,
     super.barCount,
     super.levels,
     super.activeColor,
@@ -86,7 +87,8 @@ class _SectorSignalStrengthIndicatorPainter extends CustomPainter {
     for (int i = 1; i <= barCount; i++) {
       final arcOffset = (barCount - i) * strokeWidth;
       final radius = w - arcOffset - (strokeWidth / 2);
-      final barThreshold = (i - 1) / barCount;
+      final barThreshold =
+          i == 1 ? style.normalizedMinimumActiveValue : (i - 1) / barCount;
 
       final paint = value >= barThreshold ? activeBarPaint : inactiveBarPaint;
       final firstPaint =

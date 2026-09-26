@@ -125,6 +125,22 @@ void main() {
       expect(a, isNot(equals(b)));
     });
 
+    test('different minimumActiveValue requests a repaint', () {
+      final a = BarSignalStrengthIndicatorStyle(
+        value: 0.1,
+        spacing: 0.2,
+        bevelled: false,
+      );
+      final b = BarSignalStrengthIndicatorStyle(
+        value: 0.1,
+        minimumActiveValue: 0.1,
+        spacing: 0.2,
+        bevelled: false,
+      );
+
+      expect(b.painter.shouldRepaint(a.painter), isTrue);
+    });
+
     test('equal maps have equal hash codes regardless of entry order', () {
       final a = BarSignalStrengthIndicatorStyle(
         value: 0.5,

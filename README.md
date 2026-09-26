@@ -11,6 +11,7 @@ Customizable signal strength indicator widget for Flutter.
 * [Features](#features)
 * [Installation](#installation)
 * [Usage](#usage)
+* [Minimum active value](#minimum-active-value)
 * [Parameters](#parameters)
 * [Feature requests and bugs](#feature-requests-and-bugs)
 
@@ -86,6 +87,18 @@ SignalStrengthIndicator.bars(
 )
 ```
 
+### Minimum active value
+
+By default, the first segment is active at `minValue`. Set `minimumActiveValue` to leave all segments inactive below a chosen value. The value can be fractional and must fall between `minValue` and the second segment's threshold.
+
+```dart
+SignalStrengthIndicator.bars(
+  value: 0.05,
+  minimumActiveValue: 0.1,
+  size: 40,
+)
+```
+
 ### Threshold-based coloring with `levels`
 
 `levels` is a `Map<num, Color>` mapping absolute thresholds to colors.
@@ -134,6 +147,7 @@ SignalStrengthIndicator.bars(
 | `value` | `num` | required | Current signal value |
 | `minValue` | `num?` | `0.0` | Minimum value of the range |
 | `maxValue` | `num?` | `1.0` | Maximum value of the range |
+| `minimumActiveValue` | `num?` | `minValue` | Value at which the first segment becomes active |
 | `size` | `double?` | icon theme size | Width and height of the widget |
 | `barCount` | `int` | `3` | Number of bars/segments |
 | `activeColor` | `Color?` | green | Color of active bars (when no `levels`) |
