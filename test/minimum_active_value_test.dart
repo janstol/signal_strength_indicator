@@ -102,8 +102,11 @@ void main() {
     });
 
     test('$variant rejects thresholds outside the first segment interval', () {
-      expect(() => indicator(0, minimumActiveValue: -0.1), throwsAssertionError);
-      expect(() => indicator(0, minimumActiveValue: 0.5), throwsAssertionError);
+      Widget belowRange() => indicator(0, minimumActiveValue: -0.1);
+      Widget aboveRange() => indicator(0, minimumActiveValue: 0.5);
+
+      expect(belowRange, throwsAssertionError);
+      expect(aboveRange, throwsAssertionError);
     });
   }
 }
