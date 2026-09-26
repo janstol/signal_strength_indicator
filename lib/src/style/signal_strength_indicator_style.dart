@@ -79,7 +79,9 @@ abstract class SignalStrengthIndicatorStyle {
         minValue,
         maxValue,
         barCount,
-        Object.hashAll(levels.entries.map((e) => Object.hash(e.key, e.value))),
+        Object.hashAllUnordered(
+          levels.entries.map((e) => Object.hash(e.key, e.value)),
+        ),
         activeColor,
         inactiveColor,
         size,

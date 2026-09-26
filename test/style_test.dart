@@ -124,5 +124,24 @@ void main() {
       );
       expect(a, isNot(equals(b)));
     });
+
+    test('equal maps have equal hash codes regardless of entry order', () {
+      final a = BarSignalStrengthIndicatorStyle(
+        value: 0.5,
+        spacing: 0.2,
+        bevelled: false,
+        levels: {0.25: Colors.red, 0.75: Colors.green},
+      );
+      final b = BarSignalStrengthIndicatorStyle(
+        value: 0.5,
+        spacing: 0.2,
+        bevelled: false,
+        levels: {0.75: Colors.green, 0.25: Colors.red},
+      );
+
+      expect(a, equals(b));
+      expect(a.hashCode, b.hashCode);
+      expect({a}.contains(b), isTrue);
+    });
   });
 }

@@ -1,3 +1,6 @@
+## Unreleased
+* Fixed `SignalStrengthIndicatorStyle.hashCode` for equal `levels` maps with different insertion orders
+
 ## [0.5.0] - 2026-04-10
 * **BREAKING**: migrated to Dart 3 / Flutter 3 (SDK constraint >=3.0.0 <4.0.0)
 * Replaced `lint` package with `flutter_lints` for Dart 3 compatibility
